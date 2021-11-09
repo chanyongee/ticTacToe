@@ -15,17 +15,12 @@ export default {
     },
     computed: {
         cellData() {
-            return this.$store.state.tableData[this.rowIndex][cellIndex];
-        }
-    },
-    data() {
-        return {
-
+            return this.$store.state.tableData[this.rowIndex][this.cellIndex];
         }
     },
     methods: {
         onClickTd() {
-            this.$store.commit(CLICK_CELL, this.rowIndex, this.cellIndex);
+            this.$store.commit(CLICK_CELL, {row: this.rowIndex, cell: this.cellIndex});
             this.$store.commit(CHANGE_TURN);
             /* if (this.cellData) return;
             const rootData = this.$root.$data;

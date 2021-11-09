@@ -6,10 +6,16 @@
 
 <script>
 import TdComponent from './TdComponent'
+import store from './store';
 
 export default ({
+    store,
+    computed: {
+        rowData() {
+            return this.$store.state.tableData[this.rowIndex];
+        }
+    },
     props: {
-        rowData: Array,
         rowIndex: Number
     },
     components: {

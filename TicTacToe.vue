@@ -10,6 +10,7 @@
 <script>
 import TableComponent from './TableComponent'
 import store from './store';
+import { mapState } from 'vuex';
 //import Eventbus from './Eventbus';
 
 export default ({
@@ -18,12 +19,7 @@ export default ({
         TableComponent
     },
     computed: {
-        winner() {
-            return this.$store.state.winner;
-        },
-        turn() {
-            return this.$store.state.turn;
-        }
+        ...mapState(['winner', 'turn'])
     },
     methods: {
         /* onClickTd(rowIndex, cellIndex) {
