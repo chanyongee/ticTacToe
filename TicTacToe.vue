@@ -9,6 +9,7 @@
 
 <script>
 import TableComponent from './TableComponent'
+import Eventbus from './Eventbus';
 
 export default ({
     components: {
@@ -26,7 +27,14 @@ export default ({
         }
     },
     methods: {
+        onClickTd(rowIndex, cellIndex) {
+            this.$set(this.tableData[rowIndex], cellIndex, this.turn);
+            this.turn = this.turn === "O"? 'X': 'O';
+        },
 
+    },
+    created() {
+        Eventbus.$on('clickTd', this.onClickTd);
     }
 })
 </script>
