@@ -3,6 +3,7 @@
 </template>
 
 <script>
+import Eventbus from './Eventbus';
 export default {
     props: {
         cellData: String,
@@ -17,9 +18,11 @@ export default {
     methods: {
         onClickTd() {
             if (this.cellData) return;
-            const rootData = this.$root.$data;
+            /* const rootData = this.$root.$data;
             this.$set(rootData.tableData[this.rowIndex], this.cellIndex, rootData.turn);
-            rootData.turn = rootData.turn === "O"? 'X': 'O';
+            rootData.turn = rootData.turn === "O"? 'X': 'O'; */
+            Eventbus.$emit('clickTd', this.rowIndex, this.cellIndex);
+
         }
     }
 }
