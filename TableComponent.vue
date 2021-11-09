@@ -1,23 +1,22 @@
 <template>
     <table>
-        <tr-component v-for="(rowData, index) in tableData" v-bind:key="index" v-bind:rowIndex="index" v-bind:rowData="rowData"></tr-component>    
+        <tr-component v-for="(rowData, index) in tableData" v-bind:key="index" v-bind:rowIndex="index"></tr-component>    
     </table>
 </template>
 
 <script>
 import TrComponent from './TrComponent';
+import store from './store';
 
 export default ({
-    props: {
-        tableData: Array
+    store,
+    computed: {
+        tableData() {
+            return this.$store.state.tableData;
+        }
     },
     components: {
         TrComponent
-    },
-    data() {
-        return {
-
-        }
     },
     methods: {
 

@@ -3,12 +3,20 @@
 </template>
 
 <script>
-import Eventbus from './Eventbus';
+//import Eventbus from './Eventbus';
+import store, { CLICK_CELL, CHANGE_TURN } from './store';
+
 export default {
+    store,
     props: {
-        cellData: String,
+        /* cellData: String, */
         rowIndex: Number,
         cellIndex: Number
+    },
+    computed: {
+        cellData() {
+            return this.$store.state.tableData[this.rowIndex][cellIndex];
+        }
     },
     data() {
         return {
@@ -17,11 +25,13 @@ export default {
     },
     methods: {
         onClickTd() {
-            if (this.cellData) return;
-            /* const rootData = this.$root.$data;
+            this.$store.commit(CLICK_CELL, this.rowIndex, this.cellIndex);
+            this.$store.commit(CHANGE_TURN);
+            /* if (this.cellData) return;
+            const rootData = this.$root.$data;
             this.$set(rootData.tableData[this.rowIndex], this.cellIndex, rootData.turn);
             rootData.turn = rootData.turn === "O"? 'X': 'O'; */
-            Eventbus.$emit('clickTd', this.rowIndex, this.cellIndex);
+            //Eventbus.$emit('clickTd', this.rowIndex, this.cellIndex);
 
         }
     }

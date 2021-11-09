@@ -1,7 +1,7 @@
 <template>
     <div>
         <div>{{turn}}님의 턴입니다</div>
-        <table-component v-bind:table-data="tableData"></table-component>
+        <table-component></table-component>
         <div v-if="winner">{{winner}}님의 승리!</div>
     </div>
 
@@ -9,33 +9,32 @@
 
 <script>
 import TableComponent from './TableComponent'
-import Eventbus from './Eventbus';
+import store from './store';
+//import Eventbus from './Eventbus';
 
 export default ({
+    store,
     components: {
         TableComponent
     },
-    data() {
-        return {
-            tableData: [
-                ['', '', ''],
-                ['', '', ''],
-                ['', '', '']
-            ],
-            turn: 'O',
-            winner: ''
+    computed: {
+        winner() {
+            return this.$store.state.winner;
+        },
+        turn() {
+            return this.$store.state.turn;
         }
     },
     methods: {
-        onClickTd(rowIndex, cellIndex) {
+        /* onClickTd(rowIndex, cellIndex) {
             this.$set(this.tableData[rowIndex], cellIndex, this.turn);
             this.turn = this.turn === "O"? 'X': 'O';
-        },
+        }, */
 
     },
-    created() {
+    /* created() {
         Eventbus.$on('clickTd', this.onClickTd);
-    }
+    } */
 })
 </script>
 
